@@ -21,7 +21,7 @@
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="dashboard.php" class="brand-link">
+    <a href="../index.php" class="brand-link">
       <span class="brand-text font-weight-light">Login System</span>
     </a>
 
@@ -42,6 +42,12 @@
             <a href="contacts_index.php" class="nav-link">
               <i class="nav-icon fas fa-envelope nav-icon"></i>
               <p>Contacs Messages</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="notes_index.php" class="nav-link">
+              <i class="nav-icon fas fa-sticky-note nav-icon"></i>
+              <p>Notes</p>
             </a>
           </li>
          
