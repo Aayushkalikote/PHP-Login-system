@@ -4,14 +4,14 @@ $login = false;
 $showError = false;
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-
     include('includes/conn.php');
     $username = $_POST["username"];
-    $password = $_POST["password"];
-    $sql = "SELECT `password` FROM `users` WHERE `username` = '$username'";
+    $password = $_POST["password"]; 
+
+    $sql = "SELECT * FROM `users` WHERE `username` = '$username'";
     $result = mysqli_query($conn, $sql);
 
-    if (mysqli_num_rows($result) == 1) {
+    if (mysqli_num_rows($result) > 0) {
         $row = mysqli_fetch_assoc($result);
         $hashed_password = $row['password'];
         if (password_verify($password, $hashed_password)) {
@@ -19,7 +19,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             session_start();
             $_SESSION['loggedin'] = true;
             $_SESSION['username'] = $username;
-            header("location: admin/dashboard.php");
+            $_SESSION['user_type'] = $row['user_type'];
+          
+            header('Location: ' . $_SESSION['user_type'] . '/dashboard.php');
+            exit; 
         } else {
             $showError = "Invalid Credentials";
         }
@@ -27,6 +30,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $showError = "Invalid Credentials";
     }
 }
+
+
 ?>
 
 
@@ -49,30 +54,34 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </div>';
     }
     ?>
-    <div class="container">
-        <div class="row justify-content-center mt-5">
-            <div class="col-lg-6">
-                <div class="card">
-                    <div class="card-body">
-                        <h1 class="text-center">Login Form</h1>
-                        <form method="post">
-                            <div class="mb-3">
-                                <label for="username" class="form-label">Username</label>
-                                <input type="username" required name="username" class="form-control" id="Username" placeholder="Enter username">
-                            </div>
-                            <div class="mb-3">
-                                <label for="exampleInputPassword1" class="form-label">Password</label>
-                                <input type="password" required name="password" class="form-control" id="exampleInputPassword1" placeholder="Enter password">
-                            </div>
+    <div class="py-5 shadow" style="background:linear-gradient(-45deg, #3923a7 50%, transparent 50%)">
+
+        <div class="container">
+            <div class="row justify-content-center mt-5">
+                <div class="col-lg-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h1 class="text-center">Login Form</h1>
+                            <form method="post">
+                                <div class="mb-3">
+                                    <label for="username" class="form-label">Username</label>
+                                    <input type="username" required name="username" class="form-control" id="Username" placeholder="Enter username">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="exampleInputPassword1" class="form-label">Password</label>
+                                    <input type="password" required name="password" class="form-control" id="exampleInputPassword1" placeholder="Enter password">
+                                </div>
 
 
-                            <button type="submit" class="btn btn-primary">Log IN</button>
-                        </form>
+                                <button type="submit" class="btn btn-primary btn-block">Log IN</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </body>
+<?php include 'includes/scripts.php'; ?>
 
 </html>

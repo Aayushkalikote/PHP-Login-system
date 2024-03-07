@@ -7,6 +7,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
    
     include('includes/conn.php');
     $username = $_POST["username"];
+    $user_type = 'student';
     $password = $_POST["password"];
     $confirmPassword = $_POST["cpassword"];
 
@@ -19,7 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($password == $confirmPassword) {
             $hashed_password = password_hash($password, PASSWORD_DEFAULT);
             
-            $sql = "INSERT INTO `users` (`username`, `password`, `dt`) VALUES ('$username', '$hashed_password', current_timestamp())";
+            $sql = "INSERT INTO `users` (`username`, `password`,`user_type`, `dt`) VALUES ('$username', '$hashed_password','$user_type', current_timestamp())";
             $result = mysqli_query($conn, $sql);
             if ($result) {
                 $showAlert = true;
@@ -61,7 +62,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <form method="post">
                             <div class="mb-3">
                                 <label for="username" class="form-label">Username</label>
-                                <input type="username" required name="username" class="form-control" id="Username" placeholder="Enter username">
+                                <input type="text" required name="username" class="form-control" id="Username" placeholder="Enter username">
+                            </div>
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email</label>
+                                <input type="email" required name="email" class="form-control" id="email" placeholder="Enter Email">
                             </div>
                             <div class="mb-3">
                                 <label for="exampleInputPassword1" class="form-label">Password</label>
@@ -80,5 +85,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
     </div>
 </body>
+<?php include 'includes/scripts.php'; ?>
 
 </html>

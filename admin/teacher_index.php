@@ -1,5 +1,5 @@
 <?php include('conn.php');
-$sql = "SELECT * FROM `notes`";
+$sql = "SELECT * FROM `users` WHERE `user_type` = 'teacher'";
 $result = mysqli_query($conn, $sql);
 $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
 ?>
@@ -7,21 +7,21 @@ $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
 <?php include('sidebar.php'); ?>
 
 <body>
-<?php
-if (isset($_SESSION['message'])) {
-    echo '
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
-        <strong>' . $_SESSION['message'] . '</strong>
-    </div>';
-    unset($_SESSION['message']);
-}
-?>
+    <?php
+    if (isset($_SESSION['message'])) {
+        echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>' . $_SESSION['message'] . '</strong> 
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>';
+        unset($_SESSION['message']);
+    }
+    ?>
 
     <div class="card">
         <div class="card-header py-2">
-            <h3 class="card-title">Notes list</h3>
+            <h3 class="card-title">Teacher list</h3>
             <div class="card-tools">
-              <a href="../notes.php" class="btn btn-success btn-xs"><i class="fa fa-plus mr-2"></i>Add New Notes</a>
+                <a href="teachers_add.php" class="btn btn-success btn-xs"><i class="fa fa-plus mr-2"></i>Add New Teachers</a>
             </div>
         </div>
         <div class="card-body">
@@ -30,9 +30,8 @@ if (isset($_SESSION['message'])) {
                     <thead>
                         <tr>
                             <th scope="col">#</th>
-                            <th scope="col">Subject</th>
-                            <th scope="col">Description</th>
-                            <th scope="col">Date/Time</th>
+                            <th scope="col">Username</th>
+                            <th scope="col">Email</th>
                             <th scope="col">Action</th>
                         </tr>
                     </thead>
@@ -41,19 +40,19 @@ if (isset($_SESSION['message'])) {
                             foreach ($rows as $row) : ?>
                                 <tr>
                                     <th scope="row"><?= $row["id"] ?></th>
-                                    <td><?= $row["subject"] ?></td>
-                                    <td><?= $row["description"] ?></td>
-                                    <td><?= $row["dt"] ?></td>
+                                    <td><?= $row["username"] ?></td>
+                                    <td><?= $row["email"] ?></td>
                                     <td>
                                         <div class="d-flex ">
                                             <a href="notes_edit.php?id=<?php echo $row['id']; ?>" class="nav-link">
                                                 Edit
                                             </a>
-                                            <a href="notes_delete.php?id=<?php echo $row['id'];?>" class="nav-link ml-2">
-                                                Delete
+                                            <a href="notes_delete.php?id=<?php echo $row['id']; ?>" class="nav-link ml-2">
+                                                Delete <!-- Add ml-2 (margin-left: 0.5rem) class to create gap -->
                                             </a>
                                         </div>
                                     </td>
+
                                 </tr>
                             <?php endforeach;
                         else : ?>

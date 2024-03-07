@@ -22,7 +22,7 @@
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="../index.php" class="brand-link">
-      <span class="brand-text font-weight-light">Login System</span>
+      <span class="brand-text font-weight-light">Admin Dashboard</span>
     </a>
 
     <!-- Sidebar -->
@@ -48,6 +48,12 @@
             <a href="notes_index.php" class="nav-link">
               <i class="nav-icon fas fa-sticky-note nav-icon"></i>
               <p>Notes</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="teacher_index.php" class="nav-link">
+            <i class="nav-icon fas  fa-user-tie  nav-icon"></i>              
+            <p>Teacher</p>
             </a>
           </li>
          
