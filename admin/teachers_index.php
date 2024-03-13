@@ -7,6 +7,21 @@ $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
 <?php include('sidebar.php'); ?>
 
 <body>
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0 text-dark">Dashboard</h1>
+                </div><!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Admin</a></li>
+                        <li class="breadcrumb-item active">Dashboard</li>
+                    </ol>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
     <?php
     if (isset($_SESSION['message'])) {
         echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -44,10 +59,10 @@ $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
                                     <td><?= $row["email"] ?></td>
                                     <td>
                                         <div class="d-flex ">
-                                            <a href="notes_edit.php?id=<?php echo $row['id']; ?>" class="nav-link">
+                                            <a href="teacher_edit.php?id=<?php echo $row['id']; ?>" class="nav-link text-primary">
                                                 Edit
                                             </a>
-                                            <a href="notes_delete.php?id=<?php echo $row['id']; ?>" class="nav-link ml-2">
+                                            <a href="teacher_delete.php?id=<?php echo $row['id']; ?>" class="nav-link ml-2 text-danger">
                                                 Delete <!-- Add ml-2 (margin-left: 0.5rem) class to create gap -->
                                             </a>
                                         </div>
@@ -66,14 +81,11 @@ $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
                         mysqli_close($conn);
                         ?>
                     </tbody>
-
-
                 </table>
             </div>
 
         </div>
     </div>
-
 </body>
 
 </html>

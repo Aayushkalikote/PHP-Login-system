@@ -12,7 +12,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (mysqli_num_rows($check_username_result) > 0) {
         $_SESSION['message'] = "Username already exists. Please choose a different one.";
     } else {
-    
+
             $hashed_password = password_hash($password, PASSWORD_DEFAULT);
             
             $sql = "INSERT INTO `users` (`username`, `email`,`password`,`user_type`, `dt`) VALUES ('$username','$email','$hashed_password','$user_type', current_timestamp())";
@@ -20,7 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if ($result) {
                 session_start();
                 $_SESSION['message']="Teach Created Succesfully";
-                header('Location:teacher_index.php');
+                header('Location:teachers_index.php');
             }
         
     }

@@ -51,11 +51,17 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="teacher_index.php" class="nav-link">
+            <a href="teachers_index.php" class="nav-link">
             <i class="nav-icon fas  fa-user-tie  nav-icon"></i>              
             <p>Teacher</p>
             </a>
           </li>
+          <li class="nav-item">
+                <a href="courses.php" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Courses</p>
+                </a>
+              </li>
          
         </ul>
       </nav>

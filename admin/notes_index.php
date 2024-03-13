@@ -46,10 +46,10 @@ if (isset($_SESSION['message'])) {
                                     <td><?= $row["dt"] ?></td>
                                     <td>
                                         <div class="d-flex ">
-                                            <a href="notes_edit.php?id=<?php echo $row['id']; ?>" class="nav-link">
+                                            <a href="notes_edit.php?id=<?php echo $row['id']; ?>" class="nav-link text-primary">
                                                 Edit
                                             </a>
-                                            <a href="notes_delete.php?id=<?php echo $row['id'];?>" class="nav-link ml-2">
+                                            <a href="notes_delete.php?id=<?php echo $row['id'];?>" class="nav-link ml-2 text-danger">
                                                 Delete
                                             </a>
                                         </div>
