@@ -1,5 +1,5 @@
 <?php include('conn.php');
-$sql = "SELECT * FROM `users` WHERE `user_type` = 'teacher'";
+$sql = "SELECT * FROM `users` WHERE `user_type` = 'parent'";
 $result = mysqli_query($conn, $sql);
 $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
 ?>
@@ -11,12 +11,12 @@ $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0 text-dark">Dashboard</h1>
+                    <h1 class="m-0 text-dark">Parent Index</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Admin</a></li>
-                        <li class="breadcrumb-item active">Dashboard</li>
+                        <li class="breadcrumb-item active">Parent Index</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -34,9 +34,9 @@ $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
     <div class="card">
         <div class="card-header py-2">
-            <h3 class="card-title">Teacher list</h3>
+            <h3 class="card-title">Parents list</h3>
             <div class="card-tools">
-                <a href="teachers_add.php" class="btn btn-success btn-xs"><i class="fa fa-plus mr-2"></i>Add New Teachers</a>
+                <a href="parents_add.php" class="btn btn-success btn-xs"><i class="fa fa-plus mr-2"></i>Add New Parents</a>
             </div>
         </div>
         <div class="card-body">
@@ -59,10 +59,10 @@ $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
                                     <td><?= $row["email"] ?></td>
                                     <td>
                                         <div class="d-flex ">
-                                            <a href="teacher_edit.php?id=<?php echo $row['id']; ?>" class="nav-link text-primary">
+                                            <a href="parent_edit.php?id=<?php echo $row['id']; ?>" class="nav-link text-primary">
                                                 Edit
                                             </a>
-                                            <a href="teacher_delete.php?id=<?php echo $row['id']; ?>" class="nav-link ml-2 text-danger">
+                                            <a href="student_delete.php?id=<?php echo $row['id']; ?>" class="nav-link ml-2 text-danger">
                                                 Delete <!-- Add ml-2 (margin-left: 0.5rem) class to create gap -->
                                             </a>
                                         </div>

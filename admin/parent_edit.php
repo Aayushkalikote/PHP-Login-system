@@ -2,10 +2,10 @@
 include_once('conn.php');
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST['username'];
-    $teacher_id = $_POST['id'];
+    $parent_id = $_POST['id'];
     $email = $_POST['email'];
 
-    $check_username_query = "SELECT * FROM `users` WHERE `username` = '$username' AND `id` != '$teacher_id'";
+    $check_username_query = "SELECT * FROM `users` WHERE `username` = '$username' AND `id` != '$parent_id'";
     $check_username_result = mysqli_query($conn, $check_username_query);
     if (mysqli_num_rows($check_username_result) > 0) {
         session_start();
@@ -15,8 +15,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $result = mysqli_query($conn, $sql);
         if ($result) {
             session_start();
-            $_SESSION['message'] = "Teacher Details Updated Successfully";
-            header('location:teachers_index.php');
+            $_SESSION['message'] = "Student Details Updated Successfully";
+            header('location:students_index.php');
             exit();
         } else {
             session_start();
@@ -26,28 +26,33 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 
 if (isset($_GET['id'])) {
-    $teacher_id = $_GET['id'];
-    if (isset($conn)) {
-        $sql = "SELECT * FROM `users` WHERE `id`='$teacher_id'";
-        $result = mysqli_query($conn, $sql);
+    $parent_id = $_GET['id'];
+    $sql = "SELECT * FROM `users` WHERE `id`='$parent_id'";
+    $result = mysqli_query($conn, $sql);
 
-        if ($result) {
-            if ($result->num_rows > 0) {
-                while ($row = $result->fetch_assoc()) {
-                    $username = $row['username'];
-                    $email = $row['email'];
-                    $id = $row['id'];
-                }
-            } else {
-                echo "No records found.";
+    if ($result && mysqli_num_rows($result) > 0) {
+        $parent_data = mysqli_fetch_assoc($result);
+        $username = $parent_data['username'];
+        $email = $parent_data['email'];
+
+        // Fetch related students
+        $sql_students = "SELECT * FROM `users` WHERE `id` IN (SELECT `student_id` FROM `parent_student_relation` WHERE `parent_id`='$parent_id')";
+        $result_students = mysqli_query($conn, $sql_students);
+
+        if ($result_students && mysqli_num_rows($result_students) > 0) {
+            while ($row_student = mysqli_fetch_assoc($result_students)) {
+
+                $student_username = $row_student['username'];
+               
             }
         } else {
-            echo "Error: " . mysqli_error($conn);
+            echo "No related Student found.";
         }
     } else {
-        echo "Error: Database connection not established.";
+        echo "No records found for the parent.";
     }
 }
+
 ?>
 <?php include('header.php'); ?>
 <?php include('sidebar.php'); ?>
@@ -65,11 +70,11 @@ if (isset($_GET['id'])) {
     ?>
     <div class="card">
         <div class="card-header py-2 d-flex justify-content-between align-items-center">
-            <h3 class="card-title">Teachers Edit</h3>
+            <h3 class="card-title">Parents Edit</h3>
             <div class="breadcrumb-container">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="teachers_index.php">Teachers</a></li>
-                    <li class="breadcrumb-item active">Teacher Edit</li>
+                    <li class="breadcrumb-item"><a href="teachers_index.php">Parents</a></li>
+                    <li class="breadcrumb-item active">Parents Edit</li>
                 </ol>
             </div>
         </div>
@@ -79,7 +84,7 @@ if (isset($_GET['id'])) {
                 <div class="col-lg-6">
                     <div class="card">
                         <div class="card-body">
-                            <h1 class="text-center">Teachers Edit Form</h1>
+                            <h1 class="text-center">Parents Edit Form</h1>
                             <form method="post">
                                 <input type="hidden" name="id" value="<?php echo $id; ?>">
                                 <div class="mb-3">
@@ -90,6 +95,18 @@ if (isset($_GET['id'])) {
                                     <label for="exampleInputPassword1" class="form-label">Email</label>
                                     <input type="email" required name="email" class="form-control" id="email" value="<?php echo $email; ?>" placeholder="Enter Email">
                                 </div>
+                                <div class="mb-3">
+                                    <label for="name" class="form-label">Student</label>
+                                    <select name="student_id" class="form-control" id="student_id">
+                                        <?php foreach ($students as $student) { ?>
+                                            <option value="<?= $student["id"] ?>" <?php if ($student["id"] == $selected_student_id) echo "selected"; ?>>
+                                                <?= $student["username"] ?>
+                                            </option>
+                                        <?php } ?>
+                                    </select>
+                                </div>
+
+
                                 <button type="submit" class="btn btn-block btn-primary">Update</button>
                             </form>
                         </div>
@@ -98,7 +115,7 @@ if (isset($_GET['id'])) {
             </div>
         </div>
     </div>
-    <?php include('footer.php') ?>  
+    <?php include('footer.php') ?>
 </body>
 
 </html>

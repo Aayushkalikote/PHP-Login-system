@@ -53,7 +53,7 @@ $rows = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
         </div>
       </div>
-    
+      <?php include('footer.php') ?>  
 </body>
 
 </html>

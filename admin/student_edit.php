@@ -2,10 +2,10 @@
 include_once('conn.php');
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST['username'];
-    $teacher_id = $_POST['id'];
+    $student_id = $_POST['id'];
     $email = $_POST['email'];
 
-    $check_username_query = "SELECT * FROM `users` WHERE `username` = '$username' AND `id` != '$teacher_id'";
+    $check_username_query = "SELECT * FROM `users` WHERE `username` = '$username' AND `id` != '$student_id'";
     $check_username_result = mysqli_query($conn, $check_username_query);
     if (mysqli_num_rows($check_username_result) > 0) {
         session_start();
@@ -15,8 +15,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $result = mysqli_query($conn, $sql);
         if ($result) {
             session_start();
-            $_SESSION['message'] = "Teacher Details Updated Successfully";
-            header('location:teachers_index.php');
+            $_SESSION['message'] = "Student Details Updated Successfully";
+            header('location:students_index.php');
             exit();
         } else {
             session_start();
@@ -26,9 +26,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 
 if (isset($_GET['id'])) {
-    $teacher_id = $_GET['id'];
+    $student_id = $_GET['id'];
     if (isset($conn)) {
-        $sql = "SELECT * FROM `users` WHERE `id`='$teacher_id'";
+        $sql = "SELECT * FROM `users` WHERE `id`='$student_id'";
         $result = mysqli_query($conn, $sql);
 
         if ($result) {
@@ -65,11 +65,11 @@ if (isset($_GET['id'])) {
     ?>
     <div class="card">
         <div class="card-header py-2 d-flex justify-content-between align-items-center">
-            <h3 class="card-title">Teachers Edit</h3>
+            <h3 class="card-title">Students Edit</h3>
             <div class="breadcrumb-container">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="teachers_index.php">Teachers</a></li>
-                    <li class="breadcrumb-item active">Teacher Edit</li>
+                    <li class="breadcrumb-item"><a href="teachers_index.php">Students</a></li>
+                    <li class="breadcrumb-item active">Students Edit</li>
                 </ol>
             </div>
         </div>
@@ -79,7 +79,7 @@ if (isset($_GET['id'])) {
                 <div class="col-lg-6">
                     <div class="card">
                         <div class="card-body">
-                            <h1 class="text-center">Teachers Edit Form</h1>
+                            <h1 class="text-center">Students Edit Form</h1>
                             <form method="post">
                                 <input type="hidden" name="id" value="<?php echo $id; ?>">
                                 <div class="mb-3">

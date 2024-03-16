@@ -58,35 +58,35 @@
       <!-- fix for small devices only -->
       <div class="clearfix hidden-md-up"></div>
       <div class="col-12 col-sm-6 col-md-3">
-      <a href="notes_index.php">
-        <div class="info-box mb-3">
-          <span class="info-box-icon bg-success elevation-1"><i class="fas fa-book-open"></i></span>
+        <a href="notes_index.php">
+          <div class="info-box mb-3">
+            <span class="info-box-icon bg-success elevation-1"><i class="fas fa-book-open"></i></span>
 
-          <?php
-          if (isset($conn)) {
-            $sql = "SELECT COUNT(*) as total_notes FROM `notes`";
-            $result = mysqli_query($conn, $sql);
+            <?php
+            if (isset($conn)) {
+              $sql = "SELECT COUNT(*) as total_notes FROM `notes`";
+              $result = mysqli_query($conn, $sql);
 
-            if ($result) {
-              $row = mysqli_fetch_assoc($result);
-              $total_notes = $row['total_notes'];
+              if ($result) {
+                $row = mysqli_fetch_assoc($result);
+                $total_notes = $row['total_notes'];
 
-              echo '
+                echo '
     <div class="info-box-content">
         <span class="info-box-text">Total Notes</span>
         <span class="info-box-number">' . $total_notes . '</span>
     </div>';
+              } else {
+                echo "Error: " . mysqli_error($conn);
+              }
             } else {
-              echo "Error: " . mysqli_error($conn);
+              echo "Error: Database connection not established.";
             }
-          } else {
-            echo "Error: Database connection not established.";
-          }
-          ?>
-          <!-- /.info-box-content -->
-        </div>
-        <!-- /.info-box -->
-      </a>
+            ?>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
+        </a>
       </div>
       <!-- /.col -->
       <div class="col-12 col-sm-6 col-md-3">
