@@ -23,44 +23,48 @@
   <div class="container-fluid">
     <!-- Info boxes -->
     <div class="row">
+       <a href="students_index.php" style="text-decoration: none;">
       <div class="col-12 col-sm-6 col-md-3">
-        <div class="info-box">
-          <span class="info-box-icon bg-info elevation-1"><i class="fas fa-graduation-cap"></i></span>
+       
+          <div class="info-box">
+            <span class="info-box-icon bg-info elevation-1"><i class="fas fa-graduation-cap"></i></span>
 
-          <?php
-          if (isset($conn)) {
-            $sql = "SELECT COUNT(*) as total_users FROM `users`";
-            $result = mysqli_query($conn, $sql);
+            <?php
+            if (isset($conn)) {
+              $sql = "SELECT COUNT(*) as total_students FROM `users` WHERE `user_type` = 'student'";
+              $result = mysqli_query($conn, $sql);
 
-            if ($result) {
-              $row = mysqli_fetch_assoc($result);
-              $total_users = $row['total_users'];
+              if ($result) {
+                $row = mysqli_fetch_assoc($result);
+                $total_students = $row['total_students'];
 
-              echo '
-        <div class="info-box-content">
-            <span class="info-box-text">Total Users</span>
-            <span class="info-box-number">' . $total_users . '</span>
-        </div>';
+                echo '
+    <div class="info-box-content">
+        <span class="info-box-text">Total Students</span>
+        <span class="info-box-number">' . $total_students . '</span>
+    </div>';
+              } else {
+                echo "Error: " . mysqli_error($conn);
+              }
             } else {
-              echo "Error: " . mysqli_error($conn);
+              echo "Error: Database connection not established.";
             }
-          } else {
-            echo "Error: Database connection not established.";
-          }
-          ?>
+            ?>
 
-          <!-- /.info-box-content -->
-        </div>
-        <!-- /.info-box -->
+         
+            <!-- /.info-box-content -->
+          </div>
+          </a>
+          <!-- /.info-box -->
       </div>
 
 
       <!-- fix for small devices only -->
-      <div class="clearfix hidden-md-up"></div>
       <div class="col-12 col-sm-6 col-md-3">
-        <a href="notes_index.php">
+      <a href="notes_index.php" style="text-decoration: none;">
           <div class="info-box mb-3">
-            <span class="info-box-icon bg-success elevation-1"><i class="fas fa-book-open"></i></span>
+        
+            <span class="info-box-icon bg-success elevation-1"><i class="fas fa-sticky-note nav-icon"></i></span>
 
             <?php
             if (isset($conn)) {
@@ -72,10 +76,10 @@
                 $total_notes = $row['total_notes'];
 
                 echo '
-    <div class="info-box-content">
-        <span class="info-box-text">Total Notes</span>
-        <span class="info-box-number">' . $total_notes . '</span>
-    </div>';
+              <div class="info-box-content">
+                <span class="info-box-text">Total Notes</span>
+              <span class="info-box-number">' . $total_notes . '</span>
+             </div>';
               } else {
                 echo "Error: " . mysqli_error($conn);
               }
@@ -90,15 +94,34 @@
       </div>
       <!-- /.col -->
       <div class="col-12 col-sm-6 col-md-3">
+        <a href="contacts_index.php" style="text-decoration: none;">
         <div class="info-box mb-3">
           <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-question"></i></span>
 
-          <div class="info-box-content">
-            <span class="info-box-text">New Inquiries</span>
-            <span class="info-box-number">10</span>
-          </div>
+          <?php
+            if (isset($conn)) {
+              $sql = "SELECT COUNT(*) as total_contacts FROM `contact_us`";
+              $result = mysqli_query($conn, $sql);
+
+              if ($result) {
+                $row = mysqli_fetch_assoc($result);
+                $total_contacts = $row['total_contacts'];
+
+                echo '
+              <div class="info-box-content">
+                <span class="info-box-text">Total Query</span>
+              <span class="info-box-number">' . $total_contacts . '</span>
+             </div>';
+              } else {
+                echo "Error: " . mysqli_error($conn);
+              }
+            } else {
+              echo "Error: Database connection not established.";
+            }
+            ?>
           <!-- /.info-box-content -->
         </div>
+        </a>
         <!-- /.info-box -->
       </div>
       <!-- /.col -->

@@ -46,6 +46,12 @@
             <p>Notes</p>
           </a>
         </li>
+        <li class="nav-item">
+          <a href="contacts_index.php" class="nav-link">
+            <i class="nav-icon fas fa-question nav-icon"></i>
+            <p>Contacts Message</p>
+          </a>
+        </li>
         <!-- Accounts -->
         <li class="nav-item has-treeview">
           <a href="#" class="nav-link">
@@ -81,7 +87,7 @@
 
         <!-- Manage Classes -->
         <li class="nav-item has-treeview">
-          <a href="#" class="nav-link">
+          <a href="" class="nav-link">
             <i class="nav-icon fas fa-chalkboard"></i>
             <p>
               Manage Classes
@@ -91,13 +97,13 @@
           <ul class="nav nav-treeview">
 
             <li class="nav-item">
-              <a href="<?= $site_url ?>admin/sections.php" class="nav-link">
+              <a href="sections.php" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Sections</p>
               </a>
             </li>
             <li class="nav-item">
-              <a href="<?= $site_url ?>admin/classes.php" class="nav-link">
+              <a href="classes.php" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Classes</p>
               </a>
