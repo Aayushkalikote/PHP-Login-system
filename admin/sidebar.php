@@ -117,7 +117,7 @@
             <li class="nav-item">
               <a href="<?= $site_url ?>admin/subjects.php" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
-                <p>Subects</p>
+                <p>Subjects</p>
               </a>
             </li>
             <li class="nav-item">
