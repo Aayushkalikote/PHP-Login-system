@@ -171,9 +171,9 @@
               </a>
             </li>
             <li class="nav-item">
-              <a href="<?= $site_url ?>admin/admin-card.php" class="nav-link">
+              <a href="admit_card.php" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
-                <p>Admin card</p>
+                <p>Admit card</p>
               </a>
             </li>
             <li class="nav-item">
