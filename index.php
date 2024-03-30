@@ -25,7 +25,7 @@
                 <div class="col-lg-6 my-auto">
                     <h1 class="display-3 font-weight-bold">Addmission Open for 2024-2025</h1>
                     <p class="py-lg-4">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Porro aperiam similique error, <br> iste molestiae dignissimos odit voluptat</p>
-                    <a href="" class="btn btn-lg btn-primary">Call to Action</a>
+                    <a href="admission_form.php" class="btn btn-lg btn-primary">Admission Now</a>
                 </div>
                 <div class="col-lg-6">
                     <div class="col-lg-8 mx-auto card shadow-lg">
